@@ -1,15 +1,6 @@
 import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-  UseGuards,
-  Req,
-  UseInterceptors,
-  ClassSerializerInterceptor,
+  Controller, UseInterceptors, ClassSerializerInterceptor, HttpCode,
+  UseGuards, Get, Post, Put, Patch, Delete, Body, Req, Param,
 } from '@nestjs/common';
 import PostsService from './posts.service';
 import CreatePostDto from './dto/createPost.dto';
