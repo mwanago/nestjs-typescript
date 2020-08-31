@@ -1,13 +1,6 @@
 import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  UseGuards,
-  UseInterceptors,
-  ClassSerializerInterceptor, Post,
+  Controller, UseInterceptors, ClassSerializerInterceptor, HttpCode,
+  UseGuards, Get, Post, Put, Patch, Delete, Body, Req, Param,
 } from '@nestjs/common';
 import CategoriesService from './categories.service';
 import CreateCategoryDto from './dto/createCategory.dto';
