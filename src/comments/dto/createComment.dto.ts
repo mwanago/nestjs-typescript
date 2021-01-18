@@ -5,11 +5,11 @@ import ObjectWithIdDTO from 'src/utils/types/objectWithId.dto';
 class CreateCommentDto {
   @IsString()
   @IsNotEmpty()
-  content: string;
+  content!: string;
 
   @ValidateNested()
   @Type(() => ObjectWithIdDTO)
-  post: ObjectWithIdDTO;
+  post!: ObjectWithIdDTO;
 }
 
 export default CreateCommentDto;

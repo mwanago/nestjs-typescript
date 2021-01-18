@@ -15,7 +15,7 @@ import SubscribersService from './subscribers.service.interface';
 @Controller('subscribers')
 @UseInterceptors(ClassSerializerInterceptor)
 export default class SubscribersController implements OnModuleInit {
-  private subscribersService: SubscribersService;
+  private subscribersService!: SubscribersService;
 
   constructor(@Inject('SUBSCRIBERS_PACKAGE') private client: ClientGrpc) {}
 

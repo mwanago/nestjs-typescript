@@ -1,3 +1,4 @@
+import { ClientOptions } from '@elastic/elasticsearch';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ElasticsearchModule } from '@nestjs/elasticsearch';
@@ -7,13 +8,16 @@ import { ElasticsearchModule } from '@nestjs/elasticsearch';
     ConfigModule,
     ElasticsearchModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        node: configService.get('ELASTICSEARCH_NODE'),
-        auth: {
-          username: configService.get('ELASTICSEARCH_USERNAME'),
-          password: configService.get('ELASTICSEARCH_PASSWORD'),
+      useFactory: (configService: ConfigService) => {
+        const clientOptions : ClientOptions = {
+          node: configService.get('ELASTICSEARCH_NODE'),
+          auth: {
+            username: configService.get('ELASTICSEARCH_USERNAME')!,
+            password: configService.get('ELASTICSEARCH_PASSWORD')!,
+          }
         }
-      }),
+        return clientOptions;
+      },
       inject: [ConfigService],
     }),
   ],

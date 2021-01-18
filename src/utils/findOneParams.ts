@@ -2,7 +2,7 @@ import { IsNumberString } from 'class-validator';
 
 class FindOneParams {
   @IsNumberString()
-  id: string;
+  id!: string;
 }
 
 export default FindOneParams

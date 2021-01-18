@@ -7,24 +7,24 @@ import PublicFile from '../files/publicFile.entity';
 @Entity()
 class User {
   @PrimaryGeneratedColumn()
-  public id: number;
+  public id!: number;
 
   @Column({ unique: true })
-  public email: string;
+  public email!: string;
 
   @Column()
-  public name: string;
+  public name!: string;
 
   @Column()
   @Exclude()
-  public password: string;
+  public password!: string;
 
   @OneToOne(() => Address, {
     eager: true,
     cascade: true
   })
   @JoinColumn()
-  public address: Address;
+  public address!: Address;
 
   @OneToMany(() => Post, (post: Post) => post.author)
   public posts?: Post[];
@@ -43,7 +43,7 @@ class User {
     nullable: true
   })
   @Exclude()
-  public currentHashedRefreshToken?: string;
+  public currentHashedRefreshToken?: string | null;
 }
 
 export default User;

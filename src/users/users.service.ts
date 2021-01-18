@@ -32,7 +32,7 @@ export class UsersService {
   }
 
   async create(userData: CreateUserDto) {
-    const newUser = await this.usersRepository.create(userData);
+    const newUser: User = await this.usersRepository.create(userData);
     await this.usersRepository.save(newUser);
     return newUser;
   }
@@ -42,7 +42,7 @@ export class UsersService {
     if (user.avatar) {
       await this.usersRepository.update(userId, {
         ...user,
-        avatar: null
+        avatar: undefined
       });
       await this.filesService.deletePublicFile(user.avatar.id);
     }
@@ -57,14 +57,14 @@ export class UsersService {
   async deleteAvatar(userId: number) {
     const queryRunner = this.connection.createQueryRunner();
     const user = await this.getById(userId);
-    const fileId = user.avatar?.id;
+    const fileId = user.avatar!.id;
     if (fileId) {
       await queryRunner.connect();
       await queryRunner.startTransaction();
       try {
         await queryRunner.manager.update(User, userId, {
           ...user,
-          avatar: null
+          avatar: undefined
         });
         await this.filesService.deletePublicFileWithQueryRunner(fileId, queryRunner);
         await queryRunner.commitTransaction();
@@ -86,6 +86,9 @@ export class UsersService {
 
   async getUserIfRefreshTokenMatches(refreshToken: string, userId: number) {
     const user = await this.getById(userId);
+    if (!user.currentHashedRefreshToken){
+      throw new Error(`The given user ${userId} has not refresh token. Cannot check if matching`);
+    }
 
     const isRefreshTokenMatching = await bcrypt.compare(
       refreshToken,

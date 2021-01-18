@@ -6,27 +6,27 @@ import Comment from '../comments/comment.entity';
 @Entity()
 class Post {
   @PrimaryGeneratedColumn()
-  public id: number;
+  public id!: number;
 
   @Column()
-  public title: string;
+  public title!: string;
 
   @Column('text', { array: true })
-  public paragraphs: string[];
+  public paragraphs!: string[];
 
   @Column({ nullable: true })
   public category?: string;
 
   @Index('post_authorId_index')
   @ManyToOne(() => User, (author: User) => author.posts)
-  public author: User;
+  public author!: User;
 
   @ManyToMany(() => Category, (category: Category) => category.posts)
   @JoinTable()
-  public categories: Category[];
+  public categories!: Category[];
 
   @OneToMany(() => Comment, (comment: Comment) => comment.post)
-  public comments: Comment[];
+  public comments!: Comment[];
 }
 
 export default Post;

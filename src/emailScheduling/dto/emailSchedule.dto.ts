@@ -2,18 +2,18 @@ import { IsString, IsNotEmpty, IsDateString, IsEmail } from 'class-validator';
 
 export class EmailScheduleDto {
   @IsEmail()
-  recipient: string;
+  recipient!: string;
 
   @IsString()
   @IsNotEmpty()
-  subject: string;
+  subject!: string;
 
   @IsString()
   @IsNotEmpty()
-  content: string;
+  content!: string;
 
   @IsDateString()
-  date: string;
+  date!: string;
 }
 
 export default EmailScheduleDto;

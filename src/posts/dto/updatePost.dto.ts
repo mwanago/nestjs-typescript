@@ -3,17 +3,17 @@ import { IsString, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
 export class UpdatePostDto {
   @IsNumber()
   @IsOptional()
-  id: number;
+  id!: number;
 
   @IsString({each: true})
   @IsNotEmpty()
   @IsOptional()
-  paragraphs: string[];
+  paragraphs!: string[];
 
   @IsString()
   @IsNotEmpty()
   @IsOptional()
-  title: string;
+  title!: string;
 }
 
 export default UpdatePostDto;

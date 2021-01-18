@@ -4,13 +4,13 @@ import Post from '../posts/post.entity';
 @Entity()
 class Category {
   @PrimaryGeneratedColumn()
-  public id: number;
+  public id!: number;
 
   @Column()
-  public name: string;
+  public name!: string;
 
   @ManyToMany(() => Post, (post: Post) => post.categories)
-  public posts: Post[];
+  public posts!: Post[];
 }
 
 export default Category;

@@ -1,6 +1,6 @@
 export class CreateSubscriberDto {
-  email: string;
-  name: string;
+  email!: string;
+  name!: string;
 }
 
 export default CreateSubscriberDto;
