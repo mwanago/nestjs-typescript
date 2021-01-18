@@ -1,19 +1,10 @@
 {
   "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
-    // "lib": ["es2020"],
-    // "module": "commonjs",
-    // "target": "es2020",    
-    // "strict": true,
-    // "esModuleInterop": true,
-    // "skipLibCheck": true,
-    // "forceConsistentCasingInFileNames": true,
-
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    //"target": "es2019",
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
