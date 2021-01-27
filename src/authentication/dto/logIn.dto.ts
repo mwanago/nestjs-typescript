@@ -2,12 +2,12 @@ import { IsEmail, IsString, IsNotEmpty, MinLength } from 'class-validator';
 
 export class LogInDto {
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsString()
   @IsNotEmpty()
   @MinLength(7)
-  password: string;
+  password!: string;
 }
 
 export default LogInDto;

@@ -41,7 +41,7 @@ export class AuthenticationController {
 
     await this.usersService.setCurrentRefreshToken(refreshToken, user.id);
 
-    request.res.setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie]);
+    request.res!.setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie]);
     return user;
   }
 
@@ -50,7 +50,7 @@ export class AuthenticationController {
   @HttpCode(200)
   async logOut(@Req() request: RequestWithUser) {
     await this.usersService.removeRefreshToken(request.user.id);
-    request.res.setHeader('Set-Cookie', this.authenticationService.getCookiesForLogOut());
+    request.res!.setHeader('Set-Cookie', this.authenticationService.getCookiesForLogOut());
   }
 
   @UseGuards(JwtAuthenticationGuard)
@@ -64,7 +64,7 @@ export class AuthenticationController {
   refresh(@Req() request: RequestWithUser) {
     const accessTokenCookie = this.authenticationService.getCookieWithJwtAccessToken(request.user.id);
 
-    request.res.setHeader('Set-Cookie', accessTokenCookie);
+    request.res!.setHeader('Set-Cookie', accessTokenCookie);
     return request.user;
   }
 }

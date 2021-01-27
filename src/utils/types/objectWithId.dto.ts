@@ -2,7 +2,7 @@ import { IsNumber } from 'class-validator';
 
 class ObjectWithIdDto {
   @IsNumber()
-  id: number;
+  id!: number;
 }
 
 export default ObjectWithIdDto;

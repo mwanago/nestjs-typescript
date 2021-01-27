@@ -22,10 +22,11 @@ export class AuthenticationService {
         ...registrationData,
         password: hashedPassword
       });
-      createdUser.password = undefined;
+      // TODO: Better create a DTO without the 'password' field. Privacy concerns
+      (createdUser as any)["password"] = undefined;
       return createdUser;
     } catch (error) {
-      if (error?.code === PostgresErrorCode.UniqueViolation) {
+      if (error.code === PostgresErrorCode.UniqueViolation) {
         throw new HttpException('User with that email already exists', HttpStatus.BAD_REQUEST);
       }
       throw new HttpException('Something went wrong', HttpStatus.INTERNAL_SERVER_ERROR);

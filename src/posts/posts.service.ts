@@ -21,6 +21,9 @@ export default class PostsService {
   ) {}
 
   async clearCache() {
+    if (!this.cacheManager.store.keys){
+      return; // Cache is already empty. Thorw exception?
+    }
     const keys: string[] = await this.cacheManager.store.keys();
     keys.forEach((key) => {
       if (key.startsWith(GET_POSTS_CACHE_KEY)) {

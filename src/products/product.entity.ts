@@ -6,18 +6,18 @@ import { BookProperties } from './types/bookProperties.interface';
 @Entity()
 class Product {
   @PrimaryGeneratedColumn()
-  public id: number;
+  public id!: number;
 
   @Column()
-  public name: string;
+  public name!: string;
 
   @ManyToOne(() => ProductCategory, (category: ProductCategory) => category.products)
-  public category: ProductCategory;
+  public category!: ProductCategory;
 
   @Column({
     type: 'jsonb'
   })
-  public properties: CarProperties | BookProperties;
+  public properties!: CarProperties | BookProperties;
 }
 
 export default Product;

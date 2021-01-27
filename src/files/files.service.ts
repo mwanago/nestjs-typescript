@@ -17,7 +17,7 @@ export class FilesService {
   async uploadPublicFile(dataBuffer: Buffer, filename: string) {
     const s3 = new S3();
     const uploadResult = await s3.upload({
-      Bucket: this.configService.get('AWS_PUBLIC_BUCKET_NAME'),
+      Bucket: this.configService.get('AWS_PUBLIC_BUCKET_NAME')!,
       Body: dataBuffer,
       Key: `${uuid()}-${filename}`
     })
@@ -33,9 +33,12 @@ export class FilesService {
 
   async deletePublicFile(fileId: number) {
     const file = await this.publicFilesRepository.findOne({ id: fileId });
+    if (!file){
+      throw new Error(`Cannot find file in repository. FileId:${fileId}`);
+    }
     const s3 = new S3();
     await s3.deleteObject({
-      Bucket: this.configService.get('AWS_PUBLIC_BUCKET_NAME'),
+      Bucket: this.configService.get('AWS_PUBLIC_BUCKET_NAME')!,
       Key: file.key,
     }).promise();
     await this.publicFilesRepository.delete(fileId);
@@ -43,9 +46,12 @@ export class FilesService {
 
   async deletePublicFileWithQueryRunner(fileId: number, queryRunner: QueryRunner) {
     const file = await queryRunner.manager.findOne(PublicFile, { id: fileId });
+    if (!file){
+      throw new Error(`Cannot find file in repository. FileId:${fileId}`);
+    }
     const s3 = new S3();
     await s3.deleteObject({
-      Bucket: this.configService.get('AWS_PUBLIC_BUCKET_NAME'),
+      Bucket: this.configService.get('AWS_PUBLIC_BUCKET_NAME')!,
       Key: file.key,
     }).promise();
     await queryRunner.manager.delete(PublicFile, fileId);

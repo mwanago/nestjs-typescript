@@ -5,16 +5,16 @@ import Post from '../posts/post.entity';
 @Entity()
 class Comment {
   @PrimaryGeneratedColumn()
-  public id: number;
+  public id!: number;
 
   @Column()
-  public content: string;
+  public content!: string;
 
   @ManyToOne(() => Post, (post: Post) => post.comments)
-  public post: Post;
+  public post!: Post;
 
   @ManyToOne(() => User, (author: User) => author.posts)
-  public author: User;
+  public author!: User;
 }
 
 export default Comment;
